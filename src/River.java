@@ -1,3 +1,5 @@
+import java.util.Random;
+
 public class River extends BattleLoc{
     public River(Player player) {
         super(new Bear(),player);
@@ -5,6 +7,8 @@ public class River extends BattleLoc{
 
     @Override
     public void combat() {
+        Random random=new Random();
+        int chance= random.nextInt(2);
         int playerHealt=getPlayer().getHealthy();
         System.out.println("Kombata girildi...");
         System.out.println();
@@ -16,20 +20,38 @@ public class River extends BattleLoc{
             System.out.println();
             int bearHealt =getObstacle().getHealthyO();
             while (bearHealt >0&&playerHealt>0){
-                System.out.println(getPlayer().getName()+" saldırıyı yapıyor...");
-                bearHealt -=getPlayer().getDamage();
-                if (bearHealt <=0){
-                    System.out.println(getObstacle().getNameO()+" ölmüştür.");
-                    break;
+                if (chance==0){
+                    System.out.println(getPlayer().getName()+" saldırıyı yapıyor...");
+                    bearHealt -=getPlayer().getDamage();
+                    if (bearHealt <=0){
+                        System.out.println(getObstacle().getNameO()+" ölmüştür.");
+                        break;
+                    }
+                    System.out.println(getObstacle().getNameO()+" kalan sağlığı:"+ bearHealt);
+                    System.out.println(getObstacle().getNameO()+" saldırıyor.");
+                    playerHealt-=getObstacle().getDamageO();
+                    if (playerHealt<=0){
+                        System.out.println(getPlayer().getName()+" ölmüştür");
+                        break;
+                    }
+                    System.out.println(getPlayer().getName()+" kalan sağlık:"+playerHealt);
+                }else {
+                    System.out.println(getObstacle().getNameO()+" saldırıyor.");
+                    playerHealt-=getObstacle().getDamageO();
+                    if (playerHealt<=0){
+                        System.out.println(getPlayer().getName()+" ölmüştür");
+                        break;
+                    }
+                    System.out.println(getPlayer().getName()+" kalan sağlık:"+playerHealt);
+                    System.out.println(getPlayer().getName()+" saldırıyı yapıyor...");
+                    bearHealt -=getPlayer().getDamage();
+                    if (bearHealt <=0){
+                        System.out.println(getObstacle().getNameO()+" ölmüştür.");
+                        break;
+                    }
+                    System.out.println(getObstacle().getNameO()+" kalan sağlığı:"+ bearHealt);
                 }
-                System.out.println(getObstacle().getNameO()+" kalan sağlığı:"+ bearHealt);
-                System.out.println(getObstacle().getNameO()+" saldırıyor.");
-                playerHealt-=getObstacle().getDamageO();
-                if (playerHealt<=0){
-                    System.out.println(getPlayer().getName()+" ölmüştür");
-                    break;
-                }
-                System.out.println(getPlayer().getName()+" kalan sağlık:"+playerHealt);
+
                 System.out.println();
             }
             if (playerHealt<=0){

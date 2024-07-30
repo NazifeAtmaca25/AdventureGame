@@ -18,7 +18,12 @@ public class Game {
             int choice=scanner.nextInt();
             switch (choice){
                 case 1:
-                    SafeHouse safeHouse=new SafeHouse(player);
+                    SafeHouse safeHouse = new SafeHouse(player);
+                    if (isWin(player)) {
+                        System.out.println("Tebrikler oyunu kazandınız!!!!");
+                        isIn = false;
+                        break;
+                    }
                     safeHouse.onLocation();
                     printArea();
                     break;
@@ -28,31 +33,24 @@ public class Game {
                     printArea();
                     break;
                 case 3:
-                    operation(new Cave(player));
-                    printItem(player);
-                    if (isWin(player)){
-                        System.out.println("Tebrikler oyunu kazandınız!!!!");
-                        isIn=false;
-                        break;
+                    if (!player.getInventory().isFood()){
+                        operation(new Cave(player),player);
+                    }else {
+                        System.out.println("Bu bölgeye daha önce geldiniz...");
                     }
-
                     break;
                 case 4:
-                    operation(new Forest(player));
-                    printItem(player);
-                    if (isWin(player)){
-                        System.out.println("Tebrikler oyunu kazandınız!!!!");
-                        isIn=false;
-                        break;
+                    if (!player.getInventory().isFirewood()){
+                        operation(new Forest(player),player);
+                    }else {
+                        System.out.println("Bu bölgeye daha önce geldiniz...");
                     }
                     break;
                 case 5:
-                    operation(new River(player));
-                    printItem(player);
-                    if (isWin(player)) {
-                        System.out.println("Tebrikler oyunu kazandınız!!!!");
-                        isIn = false;
-                        break;
+                    if (!player.getInventory().isWater()){
+                        operation(new River(player),player);
+                    }else{
+                        System.out.println("Bu bölgeye daha önce geldiniz...");
                     }
                     break;
                 case 6:
@@ -71,9 +69,10 @@ public class Game {
         }
 
     }
-    public void operation(BattleLoc battleLoc){
+    public void operation(BattleLoc battleLoc,Player player){
         battleLoc.onLocation();
         battleLoc.combat();
+        printItem(player);
         if (!battleLoc.isAlive()){
             System.out.println("Oyunu kaybettiniz.");
             isIn=false;
