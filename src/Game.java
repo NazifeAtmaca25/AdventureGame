@@ -3,6 +3,7 @@ import java.util.Scanner;
 public class Game {
     private Player player;
     private Location location;
+    public boolean isIn=true;
 
 
 
@@ -13,7 +14,6 @@ public class Game {
         System.out.println("Hangi bölgeye gitmek istersiniz:");
         printArea();
         Scanner scanner=new Scanner(System.in);
-        boolean isIn=true;
         while (isIn){
             int choice=scanner.nextInt();
             switch (choice){
@@ -28,54 +28,31 @@ public class Game {
                     printArea();
                     break;
                 case 3:
-                    Cave cave=new Cave(player);
-                    cave.onLocation();
-                    cave.combat();
+                    operation(new Cave(player));
                     printItem(player);
                     if (isWin(player)){
                         System.out.println("Tebrikler oyunu kazandınız!!!!");
                         isIn=false;
                         break;
                     }
-                    if (!cave.isAlive()){
-                        System.out.println("Oyunu kaybettiniz.");
-                        isIn=false;
-                    } else {
-                        printArea();
-                    }
+
                     break;
                 case 4:
-                    Forest forest=new Forest(player);
-                    forest.onLocation();
-                    forest.combat();
+                    operation(new Forest(player));
                     printItem(player);
                     if (isWin(player)){
                         System.out.println("Tebrikler oyunu kazandınız!!!!");
                         isIn=false;
                         break;
-                    }
-                    if (!forest.isAlive()){
-                        System.out.println("Oyunu kaybettiniz.");
-                        isIn=false;
-                    } else {
-                        printArea();
                     }
                     break;
                 case 5:
-                    River river=new River(player);
-                    river.onLocation();
-                    river.combat();
+                    operation(new River(player));
                     printItem(player);
-                    if (isWin(player)){
+                    if (isWin(player)) {
                         System.out.println("Tebrikler oyunu kazandınız!!!!");
-                        isIn=false;
+                        isIn = false;
                         break;
-                    }
-                    if (!river.isAlive()){
-                        System.out.println("Oyunu kaybettiniz.");
-                        isIn=false;
-                    }else {
-                        printArea();
                     }
                     break;
                 case 6:
@@ -93,6 +70,16 @@ public class Game {
             System.out.println("Oyunu kaybettiniz...");
         }
 
+    }
+    public void operation(BattleLoc battleLoc){
+        battleLoc.onLocation();
+        battleLoc.combat();
+        if (!battleLoc.isAlive()){
+            System.out.println("Oyunu kaybettiniz.");
+            isIn=false;
+        } else {
+            printArea();
+        }
     }
     public boolean isWin(Player player){
         return player.getInventory().isWater()&&player.getInventory().isFood()&&player.getInventory().isFirewood();
