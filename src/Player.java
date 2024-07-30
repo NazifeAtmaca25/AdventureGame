@@ -11,6 +11,8 @@ public class Player {
         this.inventory=inventory;
     }
 
+
+
     public void selectChar(){
         boolean isCorrect=true;
         System.out.println("Lütfen seçmek istediğiniz karakterin numarasını girin.");

@@ -1,6 +1,6 @@
 public class SafeHouse extends NormalL{
-    public SafeHouse() {
-        super("SafeHouse");
+    public SafeHouse(Player player) {
+        super(player);
     }
 
     @Override
@@ -17,6 +17,7 @@ public class SafeHouse extends NormalL{
             case "Şovalye":
                 getPlayer().setHealthy(24);
         }
+        System.out.println("Güncel can:"+getPlayer().getHealthy());
         return true;
     }
 }
