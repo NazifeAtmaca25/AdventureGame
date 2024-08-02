@@ -19,8 +19,8 @@ public class Cave extends BattleLoc{
             System.out.println(getObstacle().getNameO()+" başlangıç sağlık durumu:"+getObstacle().getHealthyO());
             System.out.println();
             int zombieHealt =getObstacle().getHealthyO();
-            while (zombieHealt >0&&playerHealt>0){
-                if (chance==0){
+            while (zombieHealt >0&&playerHealt>0){//insan veya canavar ölünceye kadar devam eder
+                if (chance==0){//kim ilk başlıyor onun karar verilmesi  karakter
                     System.out.println(getPlayer().getName()+" saldırıyı yapıyor...");
                     zombieHealt -=getPlayer().getDamage();
                     if (zombieHealt<=0){
@@ -35,7 +35,7 @@ public class Cave extends BattleLoc{
                         break;
                     }
                     System.out.println(getPlayer().getName()+" kalan sağlık:"+playerHealt);
-                }else {
+                }else {//canavar
                     System.out.println(getObstacle().getNameO()+" saldırıyor.");
                     playerHealt-=getObstacle().getDamageO();
                     if (playerHealt<=0){
@@ -58,14 +58,14 @@ public class Cave extends BattleLoc{
                 System.out.println("Karakteriniz ölmüştür...");
                 getPlayer().setHealthy(0);
                 break;
-            }else {
+            }else {//canavar azaltma ve para kazanma kısmı
                 numberofZombie--;
                 int money= getPlayer().getMoney()+4;
                 getPlayer().setMoney(money);
                 getPlayer().setHealthy(playerHealt);
             }
         }
-        if (playerHealt>0){
+        if (playerHealt>0){//yemek envamterini kazanma kısmı
             getPlayer().getInventory().setFood(true);
         }
     }

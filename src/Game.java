@@ -8,6 +8,7 @@ public class Game {
 
 
     public void start(){
+        //oyunun oynandığı kısım. diğer classlardaki bütün metodlar burada kullanıldı.
         Inventory inventory=new Inventory(false,false,false," "," ",0,0);
         Player player=new Player(inventory);
         player.selectChar();
@@ -73,6 +74,7 @@ public class Game {
 
     }
     public void operation(BattleLoc battleLoc,Player player){
+        //savaş alanlarıiçin olan metod
         battleLoc.onLocation();
         battleLoc.combat();
         printItem(player);
@@ -84,6 +86,7 @@ public class Game {
         }
     }
     public boolean isWin(Player player){
+        //alınması gerekn ögelerin alınıp alınmadığına bakar.
         return player.getInventory().isWater()&&player.getInventory().isFood()&&player.getInventory().isFirewood();
     }
     public void printItem(Player player){

@@ -19,8 +19,8 @@ public class Forest extends BattleLoc{
             System.out.println(getObstacle().getNameO()+" başlangıç sağlık durumu:"+getObstacle().getHealthyO());
             System.out.println();
             int vampireHealt =getObstacle().getHealthyO();
-            while (vampireHealt >0&&playerHealt>0){
-                if (chance==0){
+            while (vampireHealt >0&&playerHealt>0){//canavar veya insandan biri ölünceye kadar devam eder
+                if (chance==0){//ilk kimin başlanacağı karar verilir karakter
                     System.out.println(getPlayer().getName()+" saldırıyı yapıyor...");
                     vampireHealt -=getPlayer().getDamage();
                     if (vampireHealt <=0){
@@ -35,7 +35,7 @@ public class Forest extends BattleLoc{
                         break;
                     }
                     System.out.println(getPlayer().getName()+" kalan sağlık:"+playerHealt);
-                }else {
+                }else {//canavar
                     System.out.println(getObstacle().getNameO()+" saldırıyor.");
                     playerHealt-=getObstacle().getDamageO();
                     if (playerHealt<=0){
@@ -58,14 +58,14 @@ public class Forest extends BattleLoc{
                 System.out.println("Karakteriniz ölmüştür...");
                 getPlayer().setHealthy(0);
                 break;
-            }else {
+            }else {//canavar sayısı azaltma ve para kazanma kısmı
                 numberofVampire--;
                 int money= getPlayer().getMoney()+4;
                 getPlayer().setMoney(money);
                 getPlayer().setHealthy(playerHealt);
             }
         }
-        if (playerHealt>0){
+        if (playerHealt>0){//odun envaterinin kazanıldığı kısım
             getPlayer().getInventory().setFirewood(true);
         }
 

@@ -148,6 +148,7 @@ public class ToolStore extends NormalL{
         }
     }
     public int haveWeapon(){
+        //karakter silah değiştridiğinde ilk silahın verdiği hasarı geri alma
         if (getPlayer().getInventory().isWeapon()){
             int damage =getPlayer().getDamage()-getPlayer().getInventory().getWeaponDamage();
             getPlayer().setDamage(damage);
@@ -155,7 +156,9 @@ public class ToolStore extends NormalL{
         return getPlayer().getDamage();
 
     }
+
     public int haveArmor(){
+        //karakter zırh değiştirdiğinde önceki zırhın verdiği hasar engelleyiciliği geri alma
         if (getPlayer().getInventory().isArmor()){
             int healt= getPlayer().getHealthy()-getPlayer().getInventory().getArmorDefence();
             getPlayer().setHealthy(healt);

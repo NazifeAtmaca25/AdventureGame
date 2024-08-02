@@ -21,13 +21,13 @@ public class Mine extends BattleLoc{
         System.out.println();
         System.out.println(getPlayer().getName()+" başlangıç sağlık:"+getPlayer().getHealthy());
         int numberofSnake =getObstacle().obstacleNumber();
-        while (numberofSnake>0){
+        while (numberofSnake>0){//canavarlar ölünceye kadar döngüde
             System.out.println(numberofSnake + " tane "+getObstacle().getNameO()+" var.");
             System.out.println(getObstacle().getNameO()+" başlangıç sağlık durumu:"+getObstacle().getHealthyO());
             System.out.println();
             int snakeHealt =getObstacle().getHealthyO();
-            while (snakeHealt>0&&playerHealt>0){
-                if (chance==0){
+            while (snakeHealt>0&&playerHealt>0){//canavar veya insandan biri ölünceye kdar devam ediyor
+                if (chance==0){//ilk kimin başlayacağına kadar veriliyor oyuncu
                     System.out.println(getPlayer().getName()+" saldırıyı yapıyor...");
                     snakeHealt -=getPlayer().getDamage();
                     if (snakeHealt <=0){
@@ -42,7 +42,7 @@ public class Mine extends BattleLoc{
                         break;
                     }
                     System.out.println(getPlayer().getName()+" kalan sağlık:"+playerHealt);
-                }else {
+                }else {//canavar
                     System.out.println(getObstacle().getNameO()+" saldırıyor.");
                     playerHealt-=getObstacle().getDamageO();
                     if (playerHealt<=0){
@@ -65,11 +65,11 @@ public class Mine extends BattleLoc{
                 getPlayer().setHealthy(0);
                 break;
             }else {
-                //alınacak ödülleri buraya yaz...
+                //canavarı öldürdüğünde canavardan düşen rastgele eşyaların verilmesi
                 numberofSnake--;
                 int chance1=random.nextInt(101);
                 int chance2=random.nextInt(101);
-                if (chance1<=15){
+                if (chance1<=15){//silah
                     if (chance2<=20){
                         System.out.println("Tebrikler tüfek düştü...");
                         int hasar=toolStore.haveWeapon();
@@ -102,7 +102,7 @@ public class Mine extends BattleLoc{
                         System.out.println();
                     }
 
-                } else if (chance1<=30) {
+                } else if (chance1<=30) {//zırh
                     if (chance2<=20){
                         System.out.println("Tebrikler ağır zırh düştü...");
                         int healt=toolStore.haveArmor();
@@ -134,7 +134,7 @@ public class Mine extends BattleLoc{
                         System.out.println("Yeni sağlığınız:"+getPlayer().getHealthy());
                         System.out.println();
                     }
-                } else if (chance1<=55) {
+                } else if (chance1<=55) {//para
                     if (chance2<=20){
                         System.out.println("Tebrikler 10 para düştü");
                         int money= getPlayer().getMoney()+10;
