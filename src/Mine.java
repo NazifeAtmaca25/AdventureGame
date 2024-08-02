@@ -1,8 +1,10 @@
 import java.util.Random;
 
 public class Mine extends BattleLoc{
+    public ToolStore toolStore;
     public Mine(Player player) {
         super(new Snake() , player);
+        this.toolStore=new ToolStore(player);
     }
 
     @Override
@@ -65,12 +67,100 @@ public class Mine extends BattleLoc{
             }else {
                 //alınacak ödülleri buraya yaz...
                 numberofSnake--;
-                int money= getPlayer().getMoney()+4;
-                getPlayer().setMoney(money);
-                getPlayer().setHealthy(playerHealt);
+                int chance1=random.nextInt(101);
+                int chance2=random.nextInt(101);
+                if (chance1<=15){
+                    if (chance2<=20){
+                        System.out.println("Tebrikler tüfek düştü...");
+                        int hasar=toolStore.haveWeapon();
+                        getPlayer().getInventory().setWeaponName("Tüfek");
+                        getPlayer().getInventory().setWeaponDamage(7);
+                        hasar+=7;
+                        getPlayer().setDamage(hasar);
+                        getPlayer().getInventory().setWeapon(true);
+                        System.out.println("Yeni hasar:"+getPlayer().getDamage());
+                        System.out.println();
+                    } else if (chance2<=50) {
+                        System.out.println("Tebrikler kılıç düştü...");
+                        int hasar=toolStore.haveWeapon();
+                        getPlayer().getInventory().setWeaponName("Kılıç");
+                        getPlayer().getInventory().setWeaponDamage(3);
+                        hasar+=3;
+                        getPlayer().setDamage(hasar);
+                        getPlayer().getInventory().setWeapon(true);
+                        System.out.println("Yeni hasar:"+getPlayer().getDamage());
+                        System.out.println();
+                    }else {
+                        System.out.println("Tebrikler tabanca düştü...");
+                        int hasar=toolStore.haveWeapon();
+                        getPlayer().getInventory().setWeaponName("Tabanca");
+                        getPlayer().getInventory().setWeaponDamage(2);
+                        hasar+=2;
+                        getPlayer().setDamage(hasar);
+                        getPlayer().getInventory().setWeapon(true);
+                        System.out.println("Yeni hasar:"+getPlayer().getDamage());
+                        System.out.println();
+                    }
+
+                } else if (chance1<=30) {
+                    if (chance2<=20){
+                        System.out.println("Tebrikler ağır zırh düştü...");
+                        int healt=toolStore.haveArmor();
+                        getPlayer().getInventory().setArmorName("Ağır");
+                        getPlayer().getInventory().setArmorDefence(40);
+                        healt+=5;
+                        getPlayer().setHealthy(healt);
+                        getPlayer().getInventory().setArmor(true);
+                        System.out.println("Yeni sağlığınız:"+getPlayer().getHealthy());
+                        System.out.println();
+                    } else if (chance2<=50) {
+                        System.out.println("Tebrikler orta zırh düştü...");
+                        int healt=toolStore.haveArmor();
+                        getPlayer().getInventory().setArmorName("Orta");
+                        getPlayer().getInventory().setArmorDefence(3);
+                        healt+=3;
+                        getPlayer().setHealthy(healt);
+                        getPlayer().getInventory().setArmor(true);
+                        System.out.println("Yeni sağlığınız:"+getPlayer().getHealthy());
+                        System.out.println();
+                    }else {
+                        System.out.println("Tebrikler zayıf zırh düştü...");
+                        int healt=toolStore.haveArmor();
+                        getPlayer().getInventory().setArmorName("Hafif");
+                        getPlayer().getInventory().setArmorDefence(1);
+                        healt+=1;
+                        getPlayer().setHealthy(healt);
+                        getPlayer().getInventory().setArmor(true);
+                        System.out.println("Yeni sağlığınız:"+getPlayer().getHealthy());
+                        System.out.println();
+                    }
+                } else if (chance1<=55) {
+                    if (chance2<=20){
+                        System.out.println("Tebrikler 10 para düştü");
+                        int money= getPlayer().getMoney()+10;
+                        getPlayer().setMoney(money);
+                        System.out.println("Yeni bakiyeniz:"+getPlayer().getMoney());
+                        System.out.println();
+                    } else if (chance2<=50) {
+                        System.out.println("Tebrikler 5 para düştü");
+                        int money= getPlayer().getMoney()+5;
+                        getPlayer().setMoney(money);
+                        System.out.println("Yeni bakiyeniz:"+getPlayer().getMoney());
+                        System.out.println();
+                    }else {
+                        System.out.println("Tebrikler 1 para düştü");
+                        int money= getPlayer().getMoney()+1;
+                        getPlayer().setMoney(money);
+                        System.out.println("Yeni bakiyeniz:"+getPlayer().getMoney());
+                        System.out.println();
+                    }
+
+                }else {
+                    System.out.println("Hiçbir şey düşmedi");
+                }
+
             }
         }
-
     }
 
     @Override

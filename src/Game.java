@@ -54,6 +54,9 @@ public class Game {
                     }
                     break;
                 case 6:
+                    operation(new Mine(player),player);
+                    break;
+                case 7:
                     isIn=false;
                     break;
                 default:
@@ -99,7 +102,8 @@ public class Game {
                 "\n3->Cave:Mağara bölgesi 1. zorluk bölgesi, Yemekleri topla"+
                 "\n4->Forest:Orman bölgesi 2. zorluk bölgesi Odunarı topla"+
                 "\n5->River:Nehir bölgesi 3. zorluk bölgesi Suları topla"+
-                "\n6->Haritadan çıkış");
+                "\n6->Mine:Maden bölgesi 4. zorluk bölgesi Gizemli ödülleri topla"+
+                "\n7->Haritadan çıkış");
     }
 
     public Location getLocation() {

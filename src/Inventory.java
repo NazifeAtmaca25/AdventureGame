@@ -2,6 +2,8 @@ public class Inventory {
     private boolean water;
     private boolean food;
     private boolean firewood;
+    private boolean isWeapon;
+    private boolean isArmor;
     private String weaponName;
     private String armorName;
     private int weaponDamage;
@@ -71,5 +73,21 @@ public class Inventory {
 
     public void setArmorDefence(int armorDefence) {
         this.armorDefence = armorDefence;
+    }
+
+    public boolean isWeapon() {
+        return isWeapon;
+    }
+
+    public void setWeapon(boolean weapon) {
+        isWeapon = weapon;
+    }
+
+    public boolean isArmor() {
+        return isArmor;
+    }
+
+    public void setArmor(boolean armor) {
+        isArmor = armor;
     }
 }
