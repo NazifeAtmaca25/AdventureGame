@@ -12,6 +12,7 @@ public class Obstacle {
         this.healthyO = healthyO;
         this.monet0 = monet0;
     }
+
     public int obstacleNumber(){
         Random random=new Random();
         return random.nextInt(4);
