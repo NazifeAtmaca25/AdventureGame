@@ -17,45 +17,52 @@ public class Game {
         Scanner scanner=new Scanner(System.in);
         while (isIn){
             int choice=scanner.nextInt();
+            Location location;
+            BattleLoc battleLoc;
             switch (choice){
                 case 1:
-                    SafeHouse safeHouse = new SafeHouse(player);
+                    location= new SafeHouse(player);
                     if (isWin(player)) {
                         System.out.println("Tebrikler oyunu kazandınız!!!!");
                         isIn = false;
                         break;
                     }
-                    safeHouse.onLocation();
+                    location.onLocation();
                     printArea();
                     break;
                 case 2:
-                    ToolStore toolStore=new ToolStore(player);
-                    toolStore.onLocation();
+                    location=new ToolStore(player);
+                    location.onLocation();
                     printArea();
                     break;
                 case 3:
+
                     if (!player.getInventory().isFood()){
-                        operation(new Cave(player),player);
+                        battleLoc=new Cave(player);
+                        operation(battleLoc,player);
                     }else {
                         System.out.println("Bu bölgeye daha önce geldiniz...");
                     }
                     break;
                 case 4:
                     if (!player.getInventory().isFirewood()){
-                        operation(new Forest(player),player);
+                        battleLoc=new Forest(player);
+                        operation(battleLoc,player);
                     }else {
                         System.out.println("Bu bölgeye daha önce geldiniz...");
                     }
                     break;
                 case 5:
                     if (!player.getInventory().isWater()){
-                        operation(new River(player),player);
+                        battleLoc =new River(player);
+                        operation(battleLoc,player);
                     }else{
                         System.out.println("Bu bölgeye daha önce geldiniz...");
                     }
                     break;
                 case 6:
-                    operation(new Mine(player),player);
+                    battleLoc=new Mine(player);
+                    operation(battleLoc,player);
                     break;
                 case 7:
                     isIn=false;
